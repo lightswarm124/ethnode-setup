@@ -1,0 +1,32 @@
+#!/bin/bash
+
+cat > init.json <<EOF
+{
+	"config": {
+		"chainId": 2018
+	},
+
+  	"alloc"      : {},
+  	"coinbase"   : "0x0000000000000000000000000000000000000000",
+  	"difficulty" : "0x400",
+  	"extraData"  : "",
+  	"gasLimit"   : "0x2fefd8",
+  	"nonce"      : "0x0000000000000042",
+  	"mixhash"    : "0x0000000000000000000000000000000000000000000000000000000000000000",
+  	"parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+	"timestamp"  : "0x00"
+}
+EOF
+
+geth --datadir ./datadir init init.json
+
+cat > ./datadir/static-node.json <<EOF
+[
+	"enode://e5ffa6a77e5cede841e11beb074f0542e4dba46e603686e39752a395bd5f65007feec5fcbf3b7e7e36e955beb893eda4f22d469d9e2ee0036a736cecd7b3ccbc@192.168.0.35:30303",
+	"enode://a2e2ef816b45efb5276ea5d4a237e4d6663c4e292d009355ac6fc40f86ff048476df6d9f83a409736696487a276e89b4e493970fc4699f91cf7c6b8f2b2f708d@192.168.0.35:30306",
+	"enode://a477353baf03fe9de5afb35e58624c45f4e86114ad4a260320f915c4c3d16c755a8b0ab6891aefb690c040cc27db906786262d2213185d794d418bf6548c9c2e@192.168.0.27:30303?discport=0",
+	"enode://799b4c1388d0a042c551d8ce15174a8aae049d083586a6bbe64c07c6af5b885565d41e5d3fc9158ff157056e827322c9578d7fb458ccaf51fb98b726ce0dc6dc@192.168.0.15:30303"
+]
+EOF
+
+geth --datadir ./datadir account new
